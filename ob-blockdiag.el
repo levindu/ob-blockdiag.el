@@ -37,7 +37,7 @@
   '(
     (:results . "file")
     (:exports . "results")
-    (:tool    . "blockdiag")
+    (:tool    . "blockdiag3")
     (:transparency . nil)
     (:antialias . nil)
     (:font    . nil)
