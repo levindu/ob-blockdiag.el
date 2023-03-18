@@ -1,0 +1,806 @@
+#+title: Blockdiag Demo
+
+* Blockdiag Demo
+
+The demos below are ripped from http://blockdiag.com
+
+** blockdiag
+
+*** node attributes
+
+**** label
+
+#+begin_src blockdiag :file blockdiag-node-label.png
+blockdiag {
+   // Set labels to nodes.
+   B [label = "foo"];
+   C [label = "bar"];
+
+   A -> B -> C;
+}
+#+end_src
+
+**** style
+
+#+begin_src blockdiag :file blockdiag-node-style.png
+blockdiag {
+   // Set boder-style to nodes.
+   B [style = dotted];
+   C [style = dashed];
+   D [style = "3,3,3,3,15,3"];
+
+   A -> B -> C -> D;
+}
+#+end_src
+
+**** color
+
+#+begin_src blockdiag :file blockdiag-node-color.png
+blockdiag {
+   // Set backgroun-color to nodes.
+   B [color = none];
+   C [color = pink];
+   D [color = "#888888"];
+
+   A -> B -> C -> D;
+}
+#+end_src
+
+**** numbered
+
+#+begin_src blockdiag :file blockdiag-node-numbered.png
+blockdiag {
+   // Set numbered-badge to nodes.
+   B [numbered = 99];
+   C [numbered = A];
+
+   A -> B -> C;
+}
+#+end_src
+
+**** shape
+
+#+begin_src blockdiag :file blockdiag-node-shape.png
+blockdiag {
+   // standard node shapes
+   box [shape = "box"];
+   roundedbox [shape = "roundedbox"];
+   diamond [shape = "diamond"];
+   ellipse [shape = "ellipse"];
+   note [shape = "note"];
+
+   cloud [shape = "cloud"];
+   mail [shape = "mail"];
+   beginpoint [shape = "beginpoint"];
+   endpoint [shape = "endpoint"];
+   minidiamond [shape = "minidiamond"];
+   actor [shape = "actor"];
+   dots [shape = "dots"];
+
+   box -> roundedbox -> diamond -> ellipse;
+   cloud -> note -> mail -> actor;
+   minidiamond -> beginpoint -> endpoint -> dots;
+
+   // node shapes for flowcharts
+   condition [shape = "flowchart.condition"];
+   database [shape = "flowchart.database"];
+   input [shape = "flowchart.input"];
+   loopin [shape = "flowchart.loopin"];
+   loopout [shape = "flowchart.loopout"];
+   terminator [shape = "flowchart.terminator"];
+
+   condition -> database -> terminator -> input;
+   loopin -> loopout;
+}
+#+end_src
+
+**** background
+
+#+begin_src blockdiag :file blockdiag-node-background.png
+blockdiag {
+   // Set background image to nodes (and erase label).
+   A [label = "", background = "_static/python-logo.gif"];
+}
+#+end_src
+
+**** stacked
+
+#+begin_src blockdiag :file blockdiag-node-stacked.png
+blockdiag {
+   // Set stacked to nodes.
+   stacked [stacked];
+   ellipse [shape = "ellipse", stacked];
+
+   stacked -> ellipse;
+}
+#+end_src
+
+**** description
+
+#+begin_src blockdiag :file blockdiag-node-description.png
+blockdiag {
+   // Set numbered-badge and description to nodes.
+   A [numbered = 1, label = "Input", description = "Beef, carrots, potatoes, curry powder and water"];
+   B [numbered = 2, label = "Process", description = "Simmer and simmer"];
+   C [numbered = 3, label = "Output", description = "yum-yum curry"];
+
+   A -> B -> C;
+}
+#+end_src
+
+**** icon
+
+#+begin_src blockdiag :file blockdiag-node-icon.png
+blockdiag {
+  A -> B -> C;
+
+  A [icon = "_static/feed-icon-legacy_orange.png"];
+  B [icon = "_static/feed-icon-legacy_blue.png"];
+  C [icon = "_static/feed-icon-legacy_purple.png"];
+}
+#+end_src
+
+**** textcolor
+
+#+begin_src blockdiag :file blockdiag-node-textcolor.png
+blockdiag {
+  A -> B;
+
+  A[textcolor=blue];
+  B[textcolor='#FF00FF'];
+}
+#+end_src
+
+**** width and height
+
+#+begin_src blockdiag :file blockdiag-node-size.png
+blockdiag {
+  A -> B;
+
+  A[width=192];
+  B[height=64];
+}
+#+end_src
+
+**** fontsize
+
+#+begin_src blockdiag :file blockdiag-node-fontsize.png
+blockdiag {
+   A -> B;
+
+   A[fontsize=20];
+}
+#+end_src
+
+Change fontsize in group:
+
+#+begin_src blockdiag :file blockdiag-node-group-fontsize.png
+blockdiag {
+  // Set fontsize
+  default_fontsize = 20;  // default value is 11
+
+  A -> B [label = "large"];
+  B -> C [label = "small", fontsize = 11];  // change fontsize of edge-label
+
+  A [fontsize = 32];  // change fontsize of node-label
+
+  group {
+    label = "group label";
+    fontsize = 16;  // change fontsize of group-label
+
+    C;
+  }
+}
+#+end_src
+
+**** grouping nodes
+
+#+begin_src blockdiag :file blockdiag-node-grouping.png
+blockdiag admin {
+   A -> B -> C -> D;
+   A -> E;
+   A -> H;
+
+   // A and B belong to first group.
+   group {
+      A; B;
+   }
+
+   // E, F and G belong to second group.
+   group second_group {
+      // Set group-label
+      label = "second group";
+
+      // Set background-color to this group.
+      color = "#77FF77";
+
+      // Set textcolor to this group
+      textcolor = "#FF0000";
+
+      E -> F -> G;
+
+      // H and I belong to third "nested" group.
+      group {
+          label = "third group";
+          color = "#FF0000";
+
+          // Set group shape to 'line group' (default is box)
+          shape = line;
+
+          // Set line style (effects to 'line group' only)
+          style = dashed;
+
+          H -> I;
+      }
+   }
+
+   // J belongs to second group
+   J [group = second_group];
+}
+#+end_src
+
+*** edge attributes
+
+**** label
+
+#+begin_src blockdiag :file blockdiag-edge-label.png
+blockdiag {
+   // Set labels to edges. (short text only)
+   A -> B -> C [label = "foo"];
+   C -> A [label = "bar"];
+}
+#+end_src
+
+**** style
+
+#+begin_src blockdiag :file blockdiag-edge-style.png
+blockdiag {
+   // Set style to edges.
+   A -> B [style = dotted];
+   B -> C [style = dashed];
+   C -> D [style = none];
+   D -> E [style = "3,3,3,3,15,3"];
+}
+#+end_src
+
+**** hstyle - head style
+
+#+begin_src blockdiag :file blockdiag-edge-head-style.png
+blockdiag {
+   // Set head shapes to edges.
+   A -> B [hstyle = generalization];
+   B -> C [hstyle = composition];
+   C -> D [hstyle = aggregation];
+}
+#+end_src
+
+**** color
+
+#+begin_src blockdiag :file blockdiag-edge-color.png
+blockdiag {
+   // Set color to edges.
+   A -> B [color = "#0000FF"];
+   B -> C [color = "red"];
+}
+#+end_src
+
+**** dir - arrow direction
+
+#+begin_src blockdiag :file blockdiag-edge-direction.png
+blockdiag {
+   // Set arrow direction to edges.
+   A -> B [dir = none];
+   B -> C [dir = forward];
+   C -> D [dir = back];
+   D -> E [dir = both];
+
+   // Same meaning
+   F -- G -> H <- I <-> J;
+}
+#+end_src
+
+**** folded
+
+#+begin_src blockdiag :file blockdiag-edge-folded.png
+blockdiag {
+   A -> B -> C -> D -> E;
+
+   // fold edge at C to D (D will be layouted at top level; left side)
+   C -> D [folded];
+}
+#+end_src
+
+**** textcolor
+
+#+begin_src blockdiag :file blockdiag-edge-textcolor.png
+blockdiag {
+   A -> B[label=foo, textcolor=pink];
+}
+#+end_src
+
+**** fontsize
+
+#+begin_src blockdiag :file blockdiag-edge-fontsize.png
+blockdiag {
+   A -> B [label='text', fontsize=16];
+}
+#+end_src
+
+**** thick
+
+#+begin_src blockdiag :file blockdiag-edge-thick.png
+blockdiag {
+   A -> B -> C;
+        B -> D[thick];
+}
+#+end_src
+
+**** branched edges
+
+#+begin_src blockdiag :file blockdiag-branched-edges.png
+blockdiag {
+  // branching edges to multiple children
+  A -> B, C;
+
+  // branching edges from multiple parents
+  D, E -> F;
+}
+#+end_src
+
+*** diagram attributes
+
+**** node_width and node_height
+
+#+begin_src blockdiag :file blockdiag-default-node-size.png
+blockdiag {
+   // Set node metrix
+   node_width = 200;
+   node_height = 100;
+
+   A -> B;
+}
+#+end_src
+
+**** span_width and span_height
+
+#+begin_src blockdiag :file blockdiag-default-span-size.png
+blockdiag {
+   // Set span metrix
+   span_width = 240;
+   span_height = 120;
+
+   A -> B, C;
+}
+#+end_src
+
+**** default_fontsize
+
+#+begin_src blockdiag :file blockdiag-default-font-size.png
+blockdiag {
+   // Set fontsize
+   default_fontsize = 24;
+
+   A -> B;
+}
+
+#+end_src
+
+**** default_shape
+
+#+begin_src blockdiag :file blockdiag-default-shape.png
+blockdiag {
+   // set default shape
+   default_shape = roundedbox
+
+   A -> B;
+}
+#+end_src
+
+**** orientation
+
+#+begin_src blockdiag :file blockdiag-orientation.png
+blockdiag {
+   orientation = portrait
+
+   A -> B -> C;
+        B -> D;
+}
+#+end_src
+
+#+begin_src blockdiag :file blockdiag-group-orientation.png
+blockdiag {
+  A -> B -> C;
+
+  group {
+    orientation = portrait
+
+    C -> D -> E;
+  }
+}
+#+end_src
+
+**** default_node_color, default_group_color, default_linecolor and default_textcolor
+
+#+begin_src blockdiag :file blockdiag-color.png
+blockdiag {
+  default_node_color = lightyellow;
+  default_group_color = lightgreen;
+  default_linecolor = magenta;
+  default_textcolor = red;
+
+  A -> B -> C;
+       B -> D;
+  group {
+    C; D;
+  }
+}
+#+end_src
+
+#+begin_src blockdiag :file blockdiag-color2.png
+blockdiag {
+  // Set node metrix
+  node_width = 200;  // default value is 128
+  node_height = 100;  // default value is 40
+
+  // Set span metrix
+  span_width = 240;  // default value is 64
+  span_height = 120;  // default value is 40
+
+  // set default shape
+  default_shape = roundedbox;  // default value is 'box'
+
+  // set default colors
+  default_node_color = lightblue;
+  default_group_color = "#7777FF";
+  default_linecolor = blue;
+  default_textcolor = red;
+
+  A -> B [label = "Use long long\nedge label"];
+  A -> C;
+
+  group {
+    C;
+  }
+}
+#+end_src
+
+** actdiag - Activity Diagram
+
+#+begin_src actdiag :file actdiag-demo.png
+actdiag {
+  write -> convert -> image
+
+  lane user {
+     label = "User"
+     write [label = "Writing reST"];
+     image [label = "Get diagram IMAGE"];
+  }
+  lane actdiag {
+     convert [label = "Convert reST to Image"];
+  }
+}
+#+end_src
+
+** seqdiag - Sequence Diagram
+
+*** simple diagram
+
+#+begin_src seqdiag :file web.png
+seqdiag {
+  browser  -> webserver [label = "GET /index.html"];
+  browser <-- webserver;
+  browser  -> webserver [label = "POST /blog/comment"];
+              webserver  -> database [label = "INSERT comment"];
+              webserver <-- database;
+  browser <-- webserver;
+}
+#+end_src
+
+*** edge types
+
+Edge has these types:
+- normal: "->", "<-"
+- dotted: "-->", "<--"
+- async: "->>", "<<-"
+- async dotted: "-->>", "<<--"
+
+#+begin_src seqdiag :file seqedge.png
+seqdiag {
+  // normal edge and doted edge
+  A -> B [label = "normal edge"];
+  B --> C [label = "dotted edge"];
+
+  B <-- C [label = "return dotted edge"];
+  A <- B [label = "return edge"];
+
+  // asynchronus edge
+  A ->> B [label = "asynchronus edge"];
+  B -->> C [label = "asynchronus dotted edge"];
+
+  B <<-- C [label = "return asynchronus doted edge"];
+  A <<- B [label = "return asynchronus edge"];
+
+  // self referenced edge
+  A -> A [label = "self reference edge"];
+}
+#+end_src
+
+Attributes of edges
+- label = "xxx"
+- color = red
+- diagonal
+- failed
+
+
+#+begin_src seqdiag :file edge-attr.png
+seqdiag {
+  // edge label
+  A -> B [label = "call"];
+  A <- B [label = "return"];
+
+  // diagonal edge
+  A -> B [diagonal, label = "diagonal edge"];
+  A <- B [diagonal, label = "return diagonal edge"];
+
+  // color of edge
+  A -> B [label = "colored label", color = red];
+
+  // failed edge
+  A -> B [label = "failed edge", failed];
+}
+#+end_src
+
+*** auto return edge and nested
+
+- A => B [return = "auto return label"]
+- A => B { B => C [] }
+
+#+begin_src seqdiag :file auto-return-and-nested.png
+seqdiag {
+  // auto return edge
+  A => B [label = "call", return = "return"];
+
+  // nested auto return edge
+  A => B => C [label = "call", return = "return"];
+
+  // nested sequence
+  A => B [label = "nested call"]{
+     B => C [label = "call 1"];
+     B => D [label = "call 2"];
+     B => E [label = "call 3"];
+  }
+}
+#+end_src
+
+*** separators
+
+#+begin_src seqdiag :file separator.png
+seqdiag {
+  A -> B;
+
+  // Separator
+  === Separator line ===
+
+  A -> B;
+
+  // Delay separator
+  ... Separator line ...
+
+  A -> B;
+}
+#+end_src
+
+*** edge notes
+
+#+begin_src seqdiag :file edge-note.png
+seqdiag {
+  // Use note (put note on rightside)
+  browser -> webserver [note = "request\nGET /"];
+  browser <- webserver;
+
+  // Use leftnote and rightnote
+  browser -> webserver [leftnote = "send request"];
+  browser <- webserver [rightnote = "send response"];
+}
+#+end_src
+
+*** diagram attributes
+
+#+begin_src seqdiag :file diagram-attr.png
+seqdiag {
+  // Set edge metrix.
+  edge_length = 300;  // default value is 192
+  span_height = 80;  // default value is 40
+
+  // Set fontsize.
+  default_fontsize = 16;  // default value is 11
+
+  // Do not show activity line
+  activation = none;
+
+  // Numbering edges automaticaly
+  autonumber = True;
+
+  // Change note color
+  default_note_color = lightblue;
+
+  browser  -> webserver [label = "GET \n/index.html"];
+  browser <-- webserver [note = "Apache works!"];
+}
+#+end_src
+
+*** changing order of elements
+
+If you want to changing order of elements, define elements you want to layout. seqdiag sorts elements by order they appear.
+
+#+begin_src seqdiag :file web-recorder.png
+seqdiag {
+  # define order of elements
+  # seqdiag sorts elements by order they appear
+  browser; database; webserver;
+
+  browser  -> webserver [label = "GET /index.html"];
+  browser <-- webserver;
+  browser  -> webserver [label = "POST /blog/comment"];
+              webserver  -> database [label = "INSERT comment"];
+              webserver <-- database;
+  browser <-- webserver;
+}
+#+end_src
+
+** nwdiag
+
+*** simple
+
+#+begin_src nwdiag :file nwdiag-simple.png
+nwdiag {
+  network dmz {
+      address = "210.x.x.x/24"
+
+      web01 [address = "210.x.x.1"];
+      web02 [address = "210.x.x.2"];
+  }
+  network internal {
+      address = "172.x.x.x/24";
+
+      web01 [address = "172.x.x.1"];
+      web02 [address = "172.x.x.2"];
+      db01;
+      db02;
+  }
+}
+#+end_src
+
+*** define multiple addresses
+
+#+begin_src nwdiag :file nwdiag-multi-addr.png
+nwdiag {
+  network dmz {
+      address = "210.x.x.x/24"
+
+      // set multiple addresses (using comma)
+      web01 [address = "210.x.x.1, 210.x.x.20"];
+      web02 [address = "210.x.x.2"];
+  }
+  network internal {
+      address = "172.x.x.x/24";
+
+      web01 [address = "172.x.x.1"];
+      web02 [address = "172.x.x.2"];
+      db01;
+      db02;
+  }
+}
+#+end_src
+
+*** grouping nodes
+
+#+begin_src nwdiag :file nwdiag-group-nodes.png
+nwdiag {
+  network Sample_front {
+    address = "192.168.10.0/24";
+
+    // define group
+    group web {
+      web01 [address = ".1"];
+      web02 [address = ".2"];
+    }
+  }
+  network Sample_back {
+    address = "192.168.20.0/24";
+    web01 [address = ".1"];
+    web02 [address = ".2"];
+    db01 [address = ".101"];
+    db02 [address = ".102"];
+
+    // define network using defined nodes
+    group db {
+      db01;
+      db02;
+    }
+  }
+}
+#+end_src
+
+#+begin_src nwdiag :file group-nodes2.png
+nwdiag {
+  // define group at outside network definitions
+  group {
+    color = "#FF7777";
+
+    web01;
+    web02;
+    db01;
+  }
+
+  network dmz {
+    web01;
+    web02;
+  }
+  network internal {
+    web01;
+    web02;
+    db01;
+  }
+}
+#+end_src
+
+*** peer networks
+
+#+begin_src nwdiag :file nwdiag-peer-networks.png
+nwdiag {
+  inet [shape = cloud];
+  inet -- router;
+
+  network {
+    router;
+    web01;
+    web02;
+  }
+}
+#+end_src
+
+** rackdiag
+
+#+begin_src rackdiag :file rackdiag-demo.png
+rackdiag {
+  // define height of rack
+  16U;
+
+  // define rack items
+  1: UPS [2U];
+  3: DB Server
+  4: Web Server
+  5: Web Server
+  6: Web Server
+  7: Load Balancer
+  8: L3 Switch
+}
+#+end_src
+
+** packetdiag
+
+#+begin_src packetdiag :file packetdiag-demo.png
+{
+  colwidth = 32
+  node_height = 72
+
+  0-15: Source Port
+  16-31: Destination Port
+  32-63: Sequence Number
+  64-95: Acknowledgment Number
+  96-99: Data Offset
+  100-105: Reserved
+  106: URG [rotate = 270]
+  107: ACK [rotate = 270]
+  108: PSH [rotate = 270]
+  109: RST [rotate = 270]
+  110: SYN [rotate = 270]
+  111: FIN [rotate = 270]
+  112-127: Window
+  128-143: Checksum
+  144-159: Urgent Pointer
+  160-191: (Options and Padding)
+  192-223: data [colheight = 3]
+}
+#+end_src
