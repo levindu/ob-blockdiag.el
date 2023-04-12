@@ -62,17 +62,6 @@
             ((exit-code (apply 'call-process tool nil buffer nil (append args (list data-file)))))
           (if (= 0 exit-code) nil (error (format error-template tool exit-code buffer-name))))))))
 
-(defcustom org-babel-blockdiag-commands
-  '("blockdiag" "actdiag" "seqdiag" "nwdiag" "rackdiag" "packetdiag")
-  "List of names of blockdiag commands supported by babel blockdiag code blocks.
-Call `org-babel-blockdiag-initialize' when modifying this variable
-outside the Customize interface."
-  :group 'org-babel
-  :type '(repeat (string :tag "Blockdiag command: "))
-  :set (lambda (symbol value)
-         (set-default-toplevel-value symbol value)
-         (org-babel-blockdiag-initialize)))
-
 (defun org-babel-blockdiag-initialize ()
   "Define execution functions associated to blockdiag commands.
 This function has to be called whenever `org-babel-blockdiag-commands'
@@ -103,6 +92,17 @@ is modified outside the Customize interface."
                  (:size    . nil)
                  (:type    . nil))
                nil))))
+
+(defcustom org-babel-blockdiag-commands
+  '("blockdiag" "actdiag" "seqdiag" "nwdiag" "rackdiag" "packetdiag")
+  "List of names of blockdiag commands supported by babel blockdiag code blocks.
+Call `org-babel-blockdiag-initialize' when modifying this variable
+outside the Customize interface."
+  :group 'org-babel
+  :type '(repeat (string :tag "Blockdiag command: "))
+  :set (lambda (symbol value)
+         (set-default-toplevel-value symbol value)
+         (org-babel-blockdiag-initialize)))
 
 (provide 'ob-blockdiag)
 ;;; ob-blockdiag.el ends here
